@@ -7,8 +7,11 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
+using Microsoft.OpenApi.Models;
 
 namespace AspNetCoreSwaggerDemo
 {
@@ -27,7 +30,26 @@ namespace AspNetCoreSwaggerDemo
             services.AddControllers();
             
             //  Registering Swagger Service
-            services.AddSwaggerGen();
+            services.AddSwaggerGen(config =>
+            {
+                config.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "Swagger Demo App",
+                    Description = "Example project to demonstrate the use of Swagger and OpenAPI",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "John Doe",
+                        Email = "john.doe@domain.com",
+                        Url = new Uri("http://domain.com/john.doe"),
+                    },
+                    License = new OpenApiLicense
+                    {
+                        Name = "MIT Licence",
+                        Url = new Uri("http://domain.com/license"),
+                    }
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

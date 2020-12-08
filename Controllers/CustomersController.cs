@@ -13,7 +13,7 @@ namespace AspNetCoreSwaggerDemo.Controllers
     public class CustomersController : ControllerBase
     {
         [HttpGet]
-        public IActionResult Get()
+        public ActionResult<IEnumerable<CustomerViewModel>> Get()
         {
             var list = new List<CustomerViewModel>
             {
@@ -26,7 +26,7 @@ namespace AspNetCoreSwaggerDemo.Controllers
         }
 
         [HttpGet("{id:int}")]
-        public IActionResult Get(int id)
+        public ActionResult<CustomerViewModel> Get(int id)
         {
 
             return Ok(
@@ -39,19 +39,19 @@ namespace AspNetCoreSwaggerDemo.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] CustomerViewModel viewModel)
+        public ActionResult Create([FromBody] CustomerViewModel viewModel)
         {
             return Ok();
         }
 
         [HttpPut("{id:int}")]
-        public IActionResult Update(int id, [FromBody] CustomerViewModel viewModel)
+        public ActionResult Update(int id, [FromBody] CustomerViewModel viewModel)
         {
             return Ok();
         }
 
         [HttpDelete("{id:int}")]
-        public IActionResult Delete(int id)
+        public ActionResult Delete(int id)
         {
             return Ok();
         }
