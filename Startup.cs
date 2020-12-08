@@ -60,6 +60,8 @@ namespace AspNetCoreSwaggerDemo
                 app.UseDeveloperExceptionPage();
             }
 
+            // Move Swagger middleware in env.IsDevelopment()
+            // block if you want Swagger only in development mode
             app.UseSwagger();
 
             // Plug-in Swagger UI
