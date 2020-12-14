@@ -38,6 +38,25 @@ namespace AspNetCoreSwaggerDemo.Controllers
             );
         }
 
+        /// <summary>
+        /// Get the customer filtered on the email
+        /// </summary>
+        /// <param name="email">Valid email, max 100 characters</param>
+        /// <returns>CustomerViewModel</returns>
+
+        [HttpGet("{email}")]
+        public ActionResult<CustomerViewModel> Get(string email)
+        {
+
+            return Ok(
+                new CustomerViewModel
+                {
+                    Id = 1, FirstName = "Ramesh", LastName = "SR", Email = email,
+                    DateOfBirth = new DateTime(1990, 1, 1)
+                }
+            );
+        }
+
         [HttpPost]
         public ActionResult Create([FromBody] CustomerViewModel viewModel)
         {

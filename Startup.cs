@@ -49,6 +49,11 @@ namespace AspNetCoreSwaggerDemo
                         Url = new Uri("http://domain.com/license"),
                     }
                 });
+
+                // Set XML configuration
+                var xmlDocFileName = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var pathToXml = Path.Combine(AppContext.BaseDirectory, xmlDocFileName);
+                config.IncludeXmlComments(pathToXml);
             });
         }
 
