@@ -1,0 +1,39 @@
+﻿Step 1:
+Right click on the project -> Edit Project File:
+
+Add these to the PropertyGroup node:
+
+<GenerateDocumentationFile>true</GenerateDocumentationFile>
+<NoWarn>$(NoWarn);1591</NoWarn>
+
+
+-----------------------------
+Step 2:
+Wrap the whole program class in:
+
+#pragma warning disable CS1591
+public class Program {...}
+#pragma warning restore CS1591
+
+----------------------------
+Step 3:
+In the Startup.ConfigureServices
+
+services.AddSwaggerGen(config => {
+	config.SwaggerDoc(...);
+	// Set XML configuration
+        var xmlDocFileName = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+        var pathToXml = Path.Combine(AppContext.BaseDirectory, xmlDocFileName);
+        config.IncludeXmlComments(pathToXml);
+})
+
+----------------------------
+Step 4:
+In your controller, provide the xml comments for action methods:
+
+For exmaple:
+/// <summary>
+/// Get the customer filtered on the email
+/// </summary>
+/// <param name="email">Valid email, max 100 characters</param>
+/// <returns>CustomerViewModel</returns>
